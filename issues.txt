@@ -1,0 +1,2 @@
+issues:
+add company main add company by commas ka panga sahi karna hai,use explode() function for this task.

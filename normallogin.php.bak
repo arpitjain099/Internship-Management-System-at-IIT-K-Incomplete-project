@@ -1,0 +1,80 @@
+<?php $con=mysqli_connect("localhost","root","jain","spo");
+if (mysqli_connect_errno($con))
+  {
+  echo "Failed to connect to MySQL: " . mysqli_connect_error();
+    echo "<br />";
+  }
+	?>
+<?php 
+$a=$_POST["username"];
+$sql="SELECT * FROM students WHERE '$a'=username AND loginfreq=0;";
+  $res=mysqli_query($con,$sql);
+if(count(mysqli_fetch_array($res)))echo "<script>redirectfirsttime();</script>";
+$res1=mysqli_query($con,$sql);
+  if (!$res1) {
+    die('Error:Please make the entry again,either the person does not exist or you have made some mistake !' . mysql_error());
+}
+?>
+<html>
+<head><link rel="stylesheet" type="text/css" href="background.css">
+<title>
+User logged in
+</title><script>
+function redirectfirsttime(){window.location="firsttime.php";}
+<!--
+function land(ref, target)
+{
+lowtarget=target.toLowerCase();
+if (lowtarget=="_self") {window.location=loc;}
+else {if (lowtarget=="_top") {top.location=loc;}
+else {if (lowtarget=="_blank") {window.open(loc);}
+else {if (lowtarget=="_parent") {parent.location=loc;}
+else {parent.frames[target].location=loc;};
+}}}
+}
+function jump(menu)
+{
+ref=menu.choice.options[menu.choice.selectedIndex].value;
+splitc=ref.lastIndexOf("*");
+target="";
+if (splitc!=-1)
+{loc=ref.substring(0,splitc);
+target=ref.substring(splitc+1,1000);}
+else {loc=ref; target="_self";};
+if (ref != "") {land(loc,target);}
+}function cleardata(){<?php
+setcookie("user", "", time()-3600);
+?>
+window.location="index.php";}
+</script>
+</head><link rel="stylesheet" type="text/css" href="background.css">
+<body> <?php //echo $_COOKIE['user'];
+setcookie("user", $_COOKIE['user'], time()+3600);	?> 
+<?php $con=mysqli_connect("localhost","root","jain","spo");
+if (mysqli_connect_errno($con))
+  {
+  echo "Failed to connect to MySQL: " . mysqli_connect_error();
+    echo "<br />";
+  }
+  ?>
+<div align="right">
+    <button type="submit" onclick="cleardata()" formtarget="index.php">Logout</button>&nbsp&nbsp&nbsp&nbsp</div>
+    <center>You are at the main page of Application.<br>
+    ------------------
+    <br>Click on the following action to go to appropriate links</center>
+  <center>
+<form>
+<select name="choice" size="1" onChange="jump(this.form)">
+<option value="">EXTERNAL LINKS</option>
+<option value="searchcompany.php">SEARCH FOR COMPANIES</option>
+<option value="messagebox.php">CHECK MESSAGEBOX</option>
+<option value="apply.php">APPLY FOR COMPANY</option>
+<option value="contactspo.php">CONTACT SPO FOR INFO UPDATE</option>
+<option value="rules.php">RULES AND REGULATIONS</option>
+<option value="">- - - - - - - - - -</option>
+</select>
+</form>
+<a href="javascript:javascript:history.go(-1)">Click here to go back to previous page</a>
+</center>
+</body>
+</html>

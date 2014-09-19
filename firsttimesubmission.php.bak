@@ -1,0 +1,23 @@
+<html><head><link rel="stylesheet" type="text/css" href="background.css"></head>
+<?php $con=mysqli_connect("localhost","root","jain","spo");
+if (mysqli_connect_errno($con))
+  {
+  echo "Failed to connect to MySQL: " . mysqli_connect_error();
+    echo "<br />";
+  }
+  $a1=$_POST["name"];
+  $a2=$_POST["rollno"];
+  $a3=$_POST["email"];
+  $a4=$_POST["room"];
+  $a5=$_POST["hall"];
+  $a6=$_POST["cpi"];
+  $a7=$_POST["department"];
+  $a8=$_COOKIE["username"];
+  $sql1="UPDATE students
+SET name='$a1', roll_no='$a2',email='$a3',room_no='$a4',hall='$a5',cpi='$a6',department='$a7' WHERE username='$a8',loginfreq=1;";
+ //$sql="SELECT * FROM login WHERE login.username='$a' AND login.password='$b';";
+  $res1=mysqli_query($con,$sql1);
+  if (!$res1) {
+    die('Error:Please try again.You have made some mistake !' . mysql_error());
+}
+?><a href="index.php">Click here to go back to login panel again.</a>
